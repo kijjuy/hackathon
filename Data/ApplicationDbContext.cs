@@ -9,4 +9,7 @@ public class ApplicationDbContext : IdentityDbContext
         : base(options)
     {
     }
+
+    public virtual DbSet<ApplicationUser> Users { get; set; }
+
 }
