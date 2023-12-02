@@ -1,8 +1,30 @@
-@using hackathon.Models;
+@using hackathon.ViewModels;
+@model PrefSelectViewModel;
 
 @{
     ViewBag.Title = "Select Preferences";
 }
 
-<form asp-controller="Swipe" asp-action="SelectPrefs"></form>
+<form asp-controller="Swipe" asp-action="SelectPrefs" enctype="application/x-www-form-urlencoded">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label asp-for="HousePref" class="control-label" name=""></label>
+        <input type="checkbox" asp-for="HousePref" class="" aria-required="true" />
+        <span asp-validation-for="HousePref" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StudyPref" class="control-label" name=""></label>
+        <input type="checkbox" asp-for="StudyPref" class="" aria-required="true">
+        <span asp-validation-for="StudyPref" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FriendPref" class="control-label" name=""></label>
+        <input type="checkbox" asp-for="FriendPref" class="" aria-required="true">
+        <span asp-validation-for="FriendPref" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="submit" />
+    </div>
+</form>
+
 

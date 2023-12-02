@@ -9,20 +9,12 @@ namespace hackathon.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-
     private readonly UserManager<ApplicationUser> _userManager;
 
-    private readonly ApplicationDbContext _context;
-
     public HomeController(
-        ILogger<HomeController> logger,
-        ApplicationDbContext context,
         UserManager<ApplicationUser> userManager
         )
     {
-        _logger = logger;
-        _context = context;
         _userManager = userManager;
     }
 
@@ -31,7 +23,7 @@ public class HomeController : Controller
     {
         var user = await _userManager.GetUserAsync(User);
         if(user.Description != null || user.Description != "") {
-            return View("CreateProfile");
+            return RedirectToAction(nameof(SwipeController.Index), "Swipe");
         }
         return View("CreateProfile");
     }
