@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using hackathon.Models;
 using Microsoft.AspNetCore.Authorization;
-using System.Runtime.CompilerServices;
 using hackathon.Data;
 using Microsoft.AspNetCore.Identity;
 
@@ -31,17 +30,22 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var user = await _userManager.GetUserAsync(User);
-        if(user.Description != null && user.Description != "") {
-            Console.WriteLine($"{user.Description}");
-            return View();
+        if(user.Description != null || user.Description != "") {
+            return View("CreateProfile");
         }
         return View("CreateProfile");
     }
 
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult> UpdateDescription() {
-        
+    public async Task<IActionResult> UpdateProfile([Bind] UserViewModel userViewModel) {
+        if(ModelState.IsValid) {
+            var user = await _userManager.GetUserAsync(User);
+            user.Description = userViewModel.Description;
+            await _userManager.UpdateAsync(user);
+            return RedirectToAction("Index");
+        }
+        return Error();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
