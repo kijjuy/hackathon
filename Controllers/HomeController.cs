@@ -21,7 +21,7 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var user = await _userManager.GetUserAsync(User);
-        if(user.Description != null || user.Description != "") {
+        if(user.Description != null && user.Description != "") {
             return RedirectToAction(nameof(SwipeController.Index), "Swipe");
         }
         return View("CreateProfile");
