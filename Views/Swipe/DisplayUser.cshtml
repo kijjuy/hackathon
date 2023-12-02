@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Select Preferences";
     int count = Model.Count + 1;
+    int countBack = Model.Count - 1;
 }
 
 <script>
@@ -12,4 +13,9 @@
 
 <p id="profile-text">@Html.DisplayFor(model => model.Description)</p>
 
+<a href="/Swipe/DisplayUser?usernum=@countBack" class="btn btn-primary">Previous</a>
+
+<a class="btn btn-primary">Send Message to User</a>
+
 <a href="/Swipe/DisplayUser?usernum=@count" class="btn btn-primary">Next</a>
+

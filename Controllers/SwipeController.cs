@@ -25,17 +25,21 @@ public class SwipeController: Controller {
 
     [Authorize]
     public async Task<IActionResult> DisplayUser([Bind] int usernum) {
-        Console.WriteLine($"usernum is: {usernum} --------------------------------------------");
         var users = await _context.Users.ToListAsync();
         var currentUser = await _userManager.GetUserAsync(User);
-        users.Where(user => user.Id == User.FindFirstValue(ClaimTypes.NameIdentifier));
+        users.Remove(users.FirstOrDefault(user => user.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)));
         List<UserSwipeViewModel> models = new List<UserSwipeViewModel>();
         foreach(ApplicationUser user in users) {
             UserSwipeViewModel vmodel = new UserSwipeViewModel();
             vmodel.Description = user.Description;
             models.Add(vmodel);
-        } 
-        Console.WriteLine($"model count: {models.Count()} -------------------------------------");
+        }
+        if(usernum >= models.Count()) {
+            usernum = 0;
+        }
+        if(usernum < 0) {
+            usernum = models.Count() - 1;
+        }
         PageViewModel newModel = new PageViewModel {
             Description = models[usernum].Description,
             Count = usernum,
