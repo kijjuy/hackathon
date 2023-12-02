@@ -1,5 +1,5 @@
 public class UserSwipeViewModel {
 
-    public string Desctiption { get; set; }
+    public string Description { get; set; }
 
 }
