@@ -11,9 +11,9 @@ public class HomeController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public HomeController(
-        UserManager<ApplicationUser> userManager
-        )
+    private readonly RoleManager<IdentityRole> _roleManager;
+
+    public HomeController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
     }

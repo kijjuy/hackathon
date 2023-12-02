@@ -1,9 +1,6 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using hackathon.Models;
-using Microsoft.AspNetCore.Authorization;
-using hackathon.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 public class SwipeController: Controller {
 
@@ -13,7 +10,15 @@ public class SwipeController: Controller {
         _userManager = userManager;
     }
 
+    [Authorize]
     public IActionResult Index() {
+        return View();
+    }
+
+    [Authorize]
+    public async Task<IActionResult> DisplayUser(string userId) {
+        var user = _userManager.FindByIdAsync(userId);
+        //return View(user.)
         return View();
     }
 }
