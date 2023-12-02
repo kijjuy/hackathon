@@ -1,8 +1,15 @@
 @using hackathon.ViewModels
-@model UserSwipeViewModel
+@model PageViewModel
 
 @{
     ViewBag.Title = "Select Preferences";
+    int count = Model.Count + 1;
 }
 
-<p>@Html.DisplayFor(model => model.Description)</p>
+<script>
+    console.log("@count");
+</script>
+
+<p id="profile-text">@Html.DisplayFor(model => model.Description)</p>
+
+<a href="/Swipe/DisplayUser?usernum=@count" class="btn btn-primary">Next</a>
